@@ -1,0 +1,86 @@
+/* outline html body (the part of the html files that render in browser) */
+
+body {
+  border-style: dashed;
+  border-width: 3px;
+  border-color: red;
+  padding: 0px;
+  margin: 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* outline the 2 primary containers within body */
+
+header {
+  border-style: dashed;
+  border-width: 3px;
+  border-color: rgb(42, 165, 50);
+  padding: 10px;
+  margin: 10px;
+}
+
+main {
+  border-style: dashed;
+  border-width: 3px;
+  border-color: rgb(42, 165, 50);
+  padding: 10px;
+  margin: 10px;
+}
+
+/* outline name <div> (elements within the tag can be manipulated like one block) */
+
+#name {
+  border-style: dashed;
+  border-width: 1px;
+  border-color: rgb(98, 98, 228);
+  padding: 10px;
+  margin: 10px;
+}
+
+/* outline rendered content */
+
+img {
+  border-style: dashed;
+  border-width: 1px;
+  border-color: rgb(98, 98, 228);
+  padding: 10px;
+  margin: 10px;
+}
+
+p {
+  border-style: dashed;
+  border-width: 1px;
+  border-color: rgb(98, 98, 228);
+  padding: 10px;
+  margin: 10px;
+}
+
+h1,
+h4 {
+  border-style: dashed;
+  border-width: 1px;
+  border-color: rgb(98, 98, 228);
+  padding: 10px;
+  margin: 10px;
+}
+
+/* * {
+    outline: 1px solid red;
+    padding: 5px;
+    margin: 10px
+} */
+
+/* outline css rules end */
+
+/* positioning, sizing rules begin */
+
+#profile-pic {
+  width: 120px;
+  float: left;
+  margin: 0;
+  padding: 0;
+  margin-right: 15px;
+}
+#name {
+  margin-left: 150px;
+}
