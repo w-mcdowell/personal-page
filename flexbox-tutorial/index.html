@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learn Flexbox — Interactive Tutorial</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="page">
+
+  <header class="site-header">
+    <h1>Learn Flexbox</h1>
+    <p>Hands-on, interactive. Click buttons, see results, understand why.</p>
+  </header>
+
+  <!-- Progress nav -->
+  <nav class="progress-nav" id="progress-nav">
+    <button class="active" data-lesson="0">1. What is Flexbox?</button>
+    <button data-lesson="1">2. flex-direction</button>
+    <button data-lesson="2">3. justify-content</button>
+    <button data-lesson="3">4. align-items</button>
+    <button data-lesson="4">5. flex-wrap</button>
+    <button data-lesson="5">6. flex-grow &amp; shrink</button>
+    <button data-lesson="6">7. Item Properties</button>
+    <button data-lesson="7">8. Cheat Sheet</button>
+  </nav>
+
+  <!-- ══════════════════════════════════
+       LESSON 0 — What is Flexbox?
+  ══════════════════════════════════ -->
+  <section class="lesson active" id="lesson-0">
+    <div class="lesson-header">
+      <p class="lesson-num">Lesson 1 of 8</p>
+      <h2>What is Flexbox?</h2>
+      <p>
+        Flexbox (Flexible Box Layout) is a CSS layout model that lets you
+        arrange items in a row or column, distribute space between them,
+        and align them — all with a few properties on the <strong>container</strong>.
+      </p>
+    </div>
+
+    <div class="concept">
+      You activate flexbox by adding <code>display: flex</code> to a parent element.
+      That parent becomes the <strong>flex container</strong>.
+      Its direct children become <strong>flex items</strong>.
+      Toggle it below to see the difference.
+    </div>
+
+    <!-- Axis diagram -->
+    <div class="axis-diagram">
+      <div class="axis-card">
+        <h4>Main Axis →</h4>
+        <div class="axis-visual">
+          <div class="axis-line main">
+            <span class="axis-arrow">→</span>
+          </div>
+        </div>
+        <p class="axis-label-text">Items are placed along this axis.<br>Controlled by <code style="color:var(--accent);font-family:monospace">flex-direction</code></p>
+      </div>
+      <div class="axis-card">
+        <h4>Cross Axis ↕</h4>
+        <div class="axis-visual">
+          <div class="axis-line cross">
+            <span class="axis-arrow" style="bottom:-10px;right:-8px">↓</span>
+          </div>
+        </div>
+        <p class="axis-label-text">Perpendicular to main.<br>Controlled by <code style="color:var(--accent);font-family:monospace">align-items</code></p>
+      </div>
+    </div>
+
+    <div class="playground">
+      <div class="controls">
+        <div class="control-group">
+          <label><code>display</code></label>
+          <div class="btn-group">
+            <button class="active" data-prop="display" data-val="block" onclick="setContainerProp(0,'display','block',this)">block</button>
+            <button data-prop="display" data-val="flex" onclick="setContainerProp(0,'display','flex',this)">flex</button>
+          </div>
+        </div>
+      </div>
+      <div class="preview-wrap">
+        <div class="preview-label">Live Preview</div>
+        <div class="flex-container" id="fc-0" style="display:block">
+          <div class="flex-item" style="width:80px;height:60px">A</div>
+          <div class="flex-item" style="width:100px;height:80px">B</div>
+          <div class="flex-item" style="width:70px;height:50px">C</div>
+        </div>
+      </div>
+      <div class="css-output">
+        <div class="css-output-label">Generated CSS</div>
+        <pre id="css-0"><span class="css-sel">.container</span> <span class="css-brace">{</span>
+  <span class="css-prop">display</span>: <span class="css-val" id="cv-0-display">block</span>;
+<span class="css-brace">}</span></pre>
+      </div>
+    </div>
+
+    <div class="nav-buttons">
+      <button class="nav-btn" disabled>← Previous</button>
+      <button class="nav-btn primary" onclick="goLesson(1)">Next: flex-direction →</button>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       LESSON 1 — flex-direction
+  ══════════════════════════════════ -->
+  <section class="lesson" id="lesson-1">
+    <div class="lesson-header">
+      <p class="lesson-num">Lesson 2 of 8</p>
+      <h2>flex-direction</h2>
+      <p>
+        Determines the <strong>main axis</strong> — the direction items are laid out.
+        Defaults to <code>row</code> (left → right).
+      </p>
+    </div>
+
+    <div class="concept">
+      <strong>row</strong> — left to right (default) &nbsp;·&nbsp;
+      <strong>row-reverse</strong> — right to left &nbsp;·&nbsp;
+      <strong>column</strong> — top to bottom &nbsp;·&nbsp;
+      <strong>column-reverse</strong> — bottom to top.
+      Notice how swapping the direction also flips what "start" and "end" mean.
+    </div>
+
+    <div class="playground">
+      <div class="controls">
+        <div class="control-group">
+          <label><code>flex-direction</code></label>
+          <div class="btn-group">
+            <button class="active" onclick="setContainerProp(1,'flexDirection','row',this)">row</button>
+            <button onclick="setContainerProp(1,'flexDirection','row-reverse',this)">row-reverse</button>
+            <button onclick="setContainerProp(1,'flexDirection','column',this)">column</button>
+            <button onclick="setContainerProp(1,'flexDirection','column-reverse',this)">column-reverse</button>
+          </div>
+        </div>
+      </div>
+      <div class="preview-wrap">
+        <div class="preview-label">Live Preview</div>
+        <div class="flex-container" id="fc-1" style="display:flex;flex-direction:row">
+          <div class="flex-item" style="width:70px;height:60px">1</div>
+          <div class="flex-item" style="width:90px;height:60px">2</div>
+          <div class="flex-item" style="width:60px;height:60px">3</div>
+        </div>
+      </div>
+      <div class="css-output">
+        <div class="css-output-label">Generated CSS</div>
+        <pre><span class="css-sel">.container</span> <span class="css-brace">{</span>
+  <span class="css-prop">display</span>: <span class="css-val">flex</span>;
+  <span class="css-prop">flex-direction</span>: <span class="css-val" id="cv-1-flexDirection">row</span>;
+<span class="css-brace">}</span></pre>
+      </div>
+    </div>
+
+    <div class="nav-buttons">
+      <button class="nav-btn" onclick="goLesson(0)">← Previous</button>
+      <button class="nav-btn primary" onclick="goLesson(2)">Next: justify-content →</button>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       LESSON 2 — justify-content
+  ══════════════════════════════════ -->
+  <section class="lesson" id="lesson-2">
+    <div class="lesson-header">
+      <p class="lesson-num">Lesson 3 of 8</p>
+      <h2>justify-content</h2>
+      <p>
+        Controls how items are distributed along the <strong>main axis</strong>.
+        This is the property you reach for when you want items centered,
+        pushed to the ends, or spread out.
+      </p>
+    </div>
+
+    <div class="concept">
+      <strong>flex-start</strong> — pack items at the start &nbsp;·&nbsp;
+      <strong>flex-end</strong> — pack at the end &nbsp;·&nbsp;
+      <strong>center</strong> — center them &nbsp;·&nbsp;
+      <strong>space-between</strong> — equal gaps <em>between</em> items &nbsp;·&nbsp;
+      <strong>space-around</strong> — equal space around each item &nbsp;·&nbsp;
+      <strong>space-evenly</strong> — equal space everywhere including edges.
+    </div>
+
+    <div class="playground">
+      <div class="controls">
+        <div class="control-group">
+          <label><code>justify-content</code></label>
+          <div class="btn-group">
+            <button class="active" onclick="setContainerProp(2,'justifyContent','flex-start',this)">flex-start</button>
+            <button onclick="setContainerProp(2,'justifyContent','flex-end',this)">flex-end</button>
+            <button onclick="setContainerProp(2,'justifyContent','center',this)">center</button>
+            <button onclick="setContainerProp(2,'justifyContent','space-between',this)">space-between</button>
+            <button onclick="setContainerProp(2,'justifyContent','space-around',this)">space-around</button>
+            <button onclick="setContainerProp(2,'justifyContent','space-evenly',this)">space-evenly</button>
+          </div>
+        </div>
+      </div>
+      <div class="preview-wrap">
+        <div class="preview-label">Live Preview</div>
+        <div class="flex-container" id="fc-2" style="display:flex;justify-content:flex-start">
+          <div class="flex-item" style="width:70px;height:60px">A</div>
+          <div class="flex-item" style="width:70px;height:60px">B</div>
+          <div class="flex-item" style="width:70px;height:60px">C</div>
+        </div>
+      </div>
+      <div class="css-output">
+        <div class="css-output-label">Generated CSS</div>
+        <pre><span class="css-sel">.container</span> <span class="css-brace">{</span>
+  <span class="css-prop">display</span>: <span class="css-val">flex</span>;
+  <span class="css-prop">justify-content</span>: <span class="css-val" id="cv-2-justifyContent">flex-start</span>;
+<span class="css-brace">}</span></pre>
+      </div>
+    </div>
+
+    <div class="nav-buttons">
+      <button class="nav-btn" onclick="goLesson(1)">← Previous</button>
+      <button class="nav-btn primary" onclick="goLesson(3)">Next: align-items →</button>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       LESSON 3 — align-items
+  ══════════════════════════════════ -->
+  <section class="lesson" id="lesson-3">
+    <div class="lesson-header">
+      <p class="lesson-num">Lesson 4 of 8</p>
+      <h2>align-items</h2>
+      <p>
+        Controls alignment along the <strong>cross axis</strong> (perpendicular to main).
+        Use this with <code>justify-content</code> to center things in both directions.
+      </p>
+    </div>
+
+    <div class="concept">
+      Items here have intentionally different heights so you can see alignment clearly.
+      <strong>stretch</strong> (default) makes items fill the container height.
+      <strong>baseline</strong> aligns items by their text baseline.
+    </div>
+
+    <div class="playground">
+      <div class="controls">
+        <div class="control-group">
+          <label><code>align-items</code></label>
+          <div class="btn-group">
+            <button onclick="setContainerProp(3,'alignItems','stretch',this)">stretch</button>
+            <button class="active" onclick="setContainerProp(3,'alignItems','flex-start',this)">flex-start</button>
+            <button onclick="setContainerProp(3,'alignItems','flex-end',this)">flex-end</button>
+            <button onclick="setContainerProp(3,'alignItems','center',this)">center</button>
+            <button onclick="setContainerProp(3,'alignItems','baseline',this)">baseline</button>
+          </div>
+        </div>
+        <div class="control-group">
+          <label><code>justify-content</code></label>
+          <div class="btn-group">
+            <button class="active" onclick="setContainerProp(3,'justifyContent','flex-start',this)">flex-start</button>
+            <button onclick="setContainerProp(3,'justifyContent','center',this)">center</button>
+            <button onclick="setContainerProp(3,'justifyContent','space-between',this)">space-between</button>
+          </div>
+        </div>
+      </div>
+      <div class="preview-wrap">
+        <div class="preview-label">Live Preview</div>
+        <div class="flex-container" id="fc-3" style="display:flex;align-items:flex-start;height:180px">
+          <div class="flex-item" style="width:70px;height:50px;font-size:0.9rem">Short</div>
+          <div class="flex-item" style="width:80px;height:110px;font-size:1.5rem">Tall</div>
+          <div class="flex-item" style="width:70px;height:75px;font-size:1.1rem">Mid</div>
+        </div>
+      </div>
+      <div class="css-output">
+        <div class="css-output-label">Generated CSS</div>
+        <pre><span class="css-sel">.container</span> <span class="css-brace">{</span>
+  <span class="css-prop">display</span>: <span class="css-val">flex</span>;
+  <span class="css-prop">justify-content</span>: <span class="css-val" id="cv-3-justifyContent">flex-start</span>;
+  <span class="css-prop">align-items</span>: <span class="css-val" id="cv-3-alignItems">flex-start</span>;
+<span class="css-brace">}</span></pre>
+      </div>
+    </div>
+
+    <div class="nav-buttons">
+      <button class="nav-btn" onclick="goLesson(2)">← Previous</button>
+      <button class="nav-btn primary" onclick="goLesson(4)">Next: flex-wrap →</button>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       LESSON 4 — flex-wrap
+  ══════════════════════════════════ -->
+  <section class="lesson" id="lesson-4">
+    <div class="lesson-header">
+      <p class="lesson-num">Lesson 5 of 8</p>
+      <h2>flex-wrap</h2>
+      <p>
+        By default, flex items try to squeeze onto one line. <code>flex-wrap: wrap</code>
+        lets them spill onto multiple lines when there isn't enough space.
+      </p>
+    </div>
+
+    <div class="concept">
+      Try <code>nowrap</code> first — notice the items shrink to fit. Then switch to
+      <code>wrap</code> and they'll flow to new rows. <code>wrap-reverse</code> starts new
+      rows above rather than below.
+    </div>
+
+    <div class="playground">
+      <div class="controls">
+        <div class="control-group">
+          <label><code>flex-wrap</code></label>
+          <div class="btn-group">
+            <button class="active" onclick="setContainerProp(4,'flexWrap','nowrap',this)">nowrap</button>
+            <button onclick="setContainerProp(4,'flexWrap','wrap',this)">wrap</button>
+            <button onclick="setContainerProp(4,'flexWrap','wrap-reverse',this)">wrap-reverse</button>
+          </div>
+        </div>
+      </div>
+      <div class="preview-wrap">
+        <div class="preview-label">Live Preview</div>
+        <div class="flex-container" id="fc-4" style="display:flex;flex-wrap:nowrap">
+          <div class="flex-item" style="width:120px;height:60px">One</div>
+          <div class="flex-item" style="width:120px;height:60px">Two</div>
+          <div class="flex-item" style="width:120px;height:60px">Three</div>
+          <div class="flex-item" style="width:120px;height:60px">Four</div>
+          <div class="flex-item" style="width:120px;height:60px">Five</div>
+        </div>
+      </div>
+      <div class="css-output">
+        <div class="css-output-label">Generated CSS</div>
+        <pre><span class="css-sel">.container</span> <span class="css-brace">{</span>
+  <span class="css-prop">display</span>: <span class="css-val">flex</span>;
+  <span class="css-prop">flex-wrap</span>: <span class="css-val" id="cv-4-flexWrap">nowrap</span>;
+<span class="css-brace">}</span></pre>
+      </div>
+    </div>
+
+    <div class="nav-buttons">
+      <button class="nav-btn" onclick="goLesson(3)">← Previous</button>
+      <button class="nav-btn primary" onclick="goLesson(5)">Next: flex-grow &amp; shrink →</button>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       LESSON 5 — flex-grow & flex-shrink
+  ══════════════════════════════════ -->
+  <section class="lesson" id="lesson-5">
+    <div class="lesson-header">
+      <p class="lesson-num">Lesson 6 of 8</p>
+      <h2>flex-grow &amp; flex-shrink</h2>
+      <p>
+        These item-level properties control how items share extra space (<code>flex-grow</code>)
+        or give up space when there isn't enough (<code>flex-shrink</code>).
+        The values are <strong>ratios</strong>, not pixel amounts.
+      </p>
+    </div>
+
+    <div class="concept">
+      If item A has <code>flex-grow: 2</code> and item B has <code>flex-grow: 1</code>,
+      item A gets twice as much of the extra space. A value of <code>0</code> means
+      "don't grow at all." Drag the sliders below to see it live.
+    </div>
+
+    <div class="playground">
+      <div class="controls">
+        <div class="control-group">
+          <label>Item A — <code>flex-grow</code></label>
+          <div class="range-wrap">
+            <input type="range" min="0" max="4" value="1" id="grow-a"
+              oninput="setItemGrow('fc-5','0',this.value,'cv-ga');document.getElementById('cv-ga').textContent=this.value" />
+            <span class="range-val" id="cv-ga">1</span>
+          </div>
+        </div>
+        <div class="control-group">
+          <label>Item B — <code>flex-grow</code></label>
+          <div class="range-wrap">
+            <input type="range" min="0" max="4" value="1" id="grow-b"
+              oninput="setItemGrow('fc-5','1',this.value,'cv-gb');document.getElementById('cv-gb').textContent=this.value" />
+            <span class="range-val" id="cv-gb">1</span>
+          </div>
+        </div>
+        <div class="control-group">
+          <label>Item C — <code>flex-grow</code></label>
+          <div class="range-wrap">
+            <input type="range" min="0" max="4" value="1" id="grow-c"
+              oninput="setItemGrow('fc-5','2',this.value,'cv-gc');document.getElementById('cv-gc').textContent=this.value" />
+            <span class="range-val" id="cv-gc">1</span>
+          </div>
+        </div>
+      </div>
+      <div class="preview-wrap">
+        <div class="preview-label">Live Preview</div>
+        <div class="flex-container" id="fc-5" style="display:flex;gap:8px">
+          <div class="flex-item" style="flex-grow:1;height:60px">A</div>
+          <div class="flex-item" style="flex-grow:1;height:60px">B</div>
+          <div class="flex-item" style="flex-grow:1;height:60px">C</div>
+        </div>
+      </div>
+      <div class="css-output">
+        <div class="css-output-label">Generated CSS</div>
+        <pre><span class="css-sel">.item-a</span> <span class="css-brace">{</span> <span class="css-prop">flex-grow</span>: <span class="css-val" id="cv-5-ga">1</span>; <span class="css-brace">}</span>
+<span class="css-sel">.item-b</span> <span class="css-brace">{</span> <span class="css-prop">flex-grow</span>: <span class="css-val" id="cv-5-gb">1</span>; <span class="css-brace">}</span>
+<span class="css-sel">.item-c</span> <span class="css-brace">{</span> <span class="css-prop">flex-grow</span>: <span class="css-val" id="cv-5-gc">1</span>; <span class="css-brace">}</span></pre>
+      </div>
+    </div>
+
+    <div class="nav-buttons">
+      <button class="nav-btn" onclick="goLesson(4)">← Previous</button>
+      <button class="nav-btn primary" onclick="goLesson(6)">Next: Item Properties →</button>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       LESSON 6 — Item properties
+  ══════════════════════════════════ -->
+  <section class="lesson" id="lesson-6">
+    <div class="lesson-header">
+      <p class="lesson-num">Lesson 7 of 8</p>
+      <h2>Item Properties</h2>
+      <p>
+        Individual items can override container alignment and set their own sizing.
+        Select an item, then adjust its properties.
+      </p>
+    </div>
+
+    <div class="concept">
+      <strong>align-self</strong> overrides <code>align-items</code> for just one item.
+      <strong>order</strong> changes visual order without touching the HTML.
+      <strong>flex-basis</strong> sets the starting size before growing/shrinking.
+    </div>
+
+    <div class="playground">
+      <div class="controls" style="flex-direction:column;align-items:flex-start;gap:1rem">
+        <!-- Item selector -->
+        <div class="item-selector">
+          <label>Select item:</label>
+          <div class="btn-group">
+            <button class="active sel-1" onclick="selectItem(6,0,this)">Item 1</button>
+            <button class="sel-2" onclick="selectItem(6,1,this)">Item 2</button>
+            <button class="sel-3" onclick="selectItem(6,2,this)">Item 3</button>
+          </div>
+        </div>
+        <!-- Per-item controls -->
+        <div style="display:flex;gap:1rem 2rem;flex-wrap:wrap">
+          <div class="control-group">
+            <label><code>align-self</code></label>
+            <div class="btn-group" id="as-btns">
+              <button class="active" onclick="setItemProp(6,'alignSelf','auto',this)">auto</button>
+              <button onclick="setItemProp(6,'alignSelf','flex-start',this)">flex-start</button>
+              <button onclick="setItemProp(6,'alignSelf','center',this)">center</button>
+              <button onclick="setItemProp(6,'alignSelf','flex-end',this)">flex-end</button>
+              <button onclick="setItemProp(6,'alignSelf','stretch',this)">stretch</button>
+            </div>
+          </div>
+          <div class="control-group">
+            <label>Item <code>order</code></label>
+            <div class="btn-group" id="order-btns">
+              <button class="active" onclick="setItemProp(6,'order','0',this)">0</button>
+              <button onclick="setItemProp(6,'order','-1',this)">-1 (first)</button>
+              <button onclick="setItemProp(6,'order','1',this)">1</button>
+              <button onclick="setItemProp(6,'order','2',this)">2 (last)</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="preview-wrap">
+        <div class="preview-label">Live Preview — click an item above to select it, then adjust</div>
+        <div class="flex-container" id="fc-6" style="display:flex;align-items:flex-start;height:180px;gap:8px">
+          <div class="flex-item" style="width:90px;height:60px" data-item-idx="0">1</div>
+          <div class="flex-item" style="width:90px;height:100px" data-item-idx="1">2</div>
+          <div class="flex-item" style="width:90px;height:80px" data-item-idx="2">3</div>
+        </div>
+      </div>
+      <div class="css-output">
+        <div class="css-output-label">Generated CSS — selected item</div>
+        <pre><span class="css-sel">.item</span> <span class="css-brace">{</span>
+  <span class="css-prop">align-self</span>: <span class="css-val" id="cv-6-alignSelf">auto</span>;
+  <span class="css-prop">order</span>: <span class="css-val" id="cv-6-order">0</span>;
+<span class="css-brace">}</span></pre>
+      </div>
+    </div>
+
+    <div class="nav-buttons">
+      <button class="nav-btn" onclick="goLesson(5)">← Previous</button>
+      <button class="nav-btn primary" onclick="goLesson(7)">Next: Cheat Sheet →</button>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       LESSON 7 — Cheat Sheet
+  ══════════════════════════════════ -->
+  <section class="lesson" id="lesson-7">
+    <div class="lesson-header">
+      <p class="lesson-num">Lesson 8 of 8</p>
+      <h2>Flexbox Cheat Sheet</h2>
+      <p>Everything you need at a glance. Bookmark this page.</p>
+    </div>
+
+    <div class="cheat-grid">
+      <div class="cheat-card">
+        <h4>Container — Main Axis</h4>
+        <dl>
+          <dt>flex-direction</dt>
+          <dd>row · row-reverse · column · column-reverse</dd>
+          <dt>justify-content</dt>
+          <dd>flex-start · flex-end · center · space-between · space-around · space-evenly</dd>
+          <dt>flex-wrap</dt>
+          <dd>nowrap · wrap · wrap-reverse</dd>
+        </dl>
+      </div>
+      <div class="cheat-card">
+        <h4>Container — Cross Axis</h4>
+        <dl>
+          <dt>align-items</dt>
+          <dd>stretch · flex-start · flex-end · center · baseline</dd>
+          <dt>align-content</dt>
+          <dd>Same values as justify-content (for multi-line)</dd>
+        </dl>
+      </div>
+      <div class="cheat-card">
+        <h4>Item Properties</h4>
+        <dl>
+          <dt>flex-grow</dt>
+          <dd>0 (no grow) · 1 (equal share) · N (N× share)</dd>
+          <dt>flex-shrink</dt>
+          <dd>1 (default) · 0 (don't shrink)</dd>
+          <dt>flex-basis</dt>
+          <dd>auto · 0 · 200px · 30% …</dd>
+          <dt>flex</dt>
+          <dd>shorthand: grow shrink basis</dd>
+          <dt>align-self</dt>
+          <dd>Override align-items for one item</dd>
+          <dt>order</dt>
+          <dd>Integer. Default 0. Lower = earlier.</dd>
+        </dl>
+      </div>
+      <div class="cheat-card">
+        <h4>Common Recipes</h4>
+        <dl>
+          <dt>Center everything</dt>
+          <dd>justify-content: center; align-items: center;</dd>
+          <dt>Space items out</dt>
+          <dd>justify-content: space-between;</dd>
+          <dt>Sidebar layout</dt>
+          <dd>sidebar: flex-shrink:0; main: flex-grow:1</dd>
+          <dt>Equal columns</dt>
+          <dd>each item: flex: 1;</dd>
+        </dl>
+      </div>
+    </div>
+
+    <!-- Final playground — free play -->
+    <div style="margin-top:2rem">
+      <div class="lesson-header">
+        <h2 style="font-size:1.3rem">Free Play Sandbox</h2>
+        <p>Combine everything you've learned.</p>
+      </div>
+      <div class="playground">
+        <div class="controls">
+          <div class="control-group">
+            <label><code>flex-direction</code></label>
+            <div class="btn-group">
+              <button class="active" onclick="setContainerProp(7,'flexDirection','row',this)">row</button>
+              <button onclick="setContainerProp(7,'flexDirection','column',this)">column</button>
+            </div>
+          </div>
+          <div class="control-group">
+            <label><code>justify-content</code></label>
+            <div class="btn-group">
+              <button class="active" onclick="setContainerProp(7,'justifyContent','flex-start',this)">start</button>
+              <button onclick="setContainerProp(7,'justifyContent','center',this)">center</button>
+              <button onclick="setContainerProp(7,'justifyContent','space-between',this)">between</button>
+              <button onclick="setContainerProp(7,'justifyContent','space-evenly',this)">evenly</button>
+            </div>
+          </div>
+          <div class="control-group">
+            <label><code>align-items</code></label>
+            <div class="btn-group">
+              <button class="active" onclick="setContainerProp(7,'alignItems','stretch',this)">stretch</button>
+              <button onclick="setContainerProp(7,'alignItems','flex-start',this)">start</button>
+              <button onclick="setContainerProp(7,'alignItems','center',this)">center</button>
+              <button onclick="setContainerProp(7,'alignItems','flex-end',this)">end</button>
+            </div>
+          </div>
+          <div class="control-group">
+            <label><code>flex-wrap</code></label>
+            <div class="btn-group">
+              <button class="active" onclick="setContainerProp(7,'flexWrap','nowrap',this)">nowrap</button>
+              <button onclick="setContainerProp(7,'flexWrap','wrap',this)">wrap</button>
+            </div>
+          </div>
+        </div>
+        <div class="preview-wrap">
+          <div class="preview-label">Live Preview</div>
+          <div class="flex-container" id="fc-7" style="display:flex;height:200px;gap:8px">
+            <div class="flex-item" style="width:80px;height:60px">1</div>
+            <div class="flex-item" style="width:80px;height:80px">2</div>
+            <div class="flex-item" style="width:80px;height:50px">3</div>
+            <div class="flex-item" style="width:80px;height:90px">4</div>
+            <div class="flex-item" style="width:80px;height:65px">5</div>
+          </div>
+        </div>
+        <div class="css-output">
+          <div class="css-output-label">Generated CSS</div>
+          <pre><span class="css-sel">.container</span> <span class="css-brace">{</span>
+  <span class="css-prop">display</span>: <span class="css-val">flex</span>;
+  <span class="css-prop">flex-direction</span>: <span class="css-val" id="cv-7-flexDirection">row</span>;
+  <span class="css-prop">justify-content</span>: <span class="css-val" id="cv-7-justifyContent">flex-start</span>;
+  <span class="css-prop">align-items</span>: <span class="css-val" id="cv-7-alignItems">stretch</span>;
+  <span class="css-prop">flex-wrap</span>: <span class="css-val" id="cv-7-flexWrap">nowrap</span>;
+<span class="css-brace">}</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-buttons">
+      <button class="nav-btn" onclick="goLesson(6)">← Previous</button>
+      <button class="nav-btn" disabled style="opacity:0.4">You've finished! 🎉</button>
+    </div>
+  </section>
+
+</div><!-- /page -->
+
+<script>
+  // ── Navigation ──────────────────────────────────────────
+  function goLesson(n) {
+    document.querySelectorAll('.lesson').forEach((l, i) => {
+      l.classList.toggle('active', i === n);
+    });
+    document.querySelectorAll('#progress-nav button').forEach((b, i) => {
+      b.classList.toggle('active', i === n);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('#progress-nav button').forEach((btn, i) => {
+    btn.addEventListener('click', () => goLesson(i));
+  });
+
+  // ── Container prop helpers ───────────────────────────────
+  function setContainerProp(lessonIdx, prop, val, btn) {
+    const fc = document.getElementById('fc-' + lessonIdx);
+    if (!fc) return;
+    fc.style[prop] = val;
+
+    // Update CSS output display value
+    const cvId = 'cv-' + lessonIdx + '-' + prop;
+    const cv = document.getElementById(cvId);
+    if (cv) cv.textContent = val;
+
+    // Toggle active class within the same btn-group
+    if (btn) {
+      btn.closest('.btn-group').querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+  }
+
+  // ── Lesson 0: display toggle ─────────────────────────────
+  // handled inline via setContainerProp
+
+  // ── Lesson 5: flex-grow sliders ─────────────────────────
+  function setItemGrow(fcId, itemIdx, val, dispId) {
+    const fc = document.getElementById(fcId);
+    if (!fc) return;
+    const item = fc.children[itemIdx];
+    if (item) item.style.flexGrow = val;
+
+    // Update CSS display
+    const labels = { '0': 'cv-5-ga', '1': 'cv-5-gb', '2': 'cv-5-gc' };
+    const el = document.getElementById(labels[itemIdx]);
+    if (el) el.textContent = val;
+  }
+
+  // ── Lesson 6: per-item props ─────────────────────────────
+  let selectedItemIdx = 0;
+
+  function selectItem(lessonIdx, idx, btn) {
+    selectedItemIdx = idx;
+    const fc = document.getElementById('fc-' + lessonIdx);
+    if (!fc) return;
+
+    // Highlight selected
+    Array.from(fc.children).forEach((child, i) => {
+      child.classList.toggle('selected-ring', i === idx);
+    });
+
+    // Update selector buttons
+    btn.closest('.btn-group').querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Sync control buttons to the item's current values
+    const item = fc.children[idx];
+    syncBtnGroup('as-btns', item.style.alignSelf || 'auto');
+    syncBtnGroup('order-btns', item.style.order || '0');
+    document.getElementById('cv-6-alignSelf').textContent = item.style.alignSelf || 'auto';
+    document.getElementById('cv-6-order').textContent = item.style.order || '0';
+  }
+
+  function syncBtnGroup(groupId, val) {
+    document.getElementById(groupId).querySelectorAll('button').forEach(b => {
+      b.classList.toggle('active', b.textContent.trim() === val ||
+        (b.dataset && b.textContent.trim().startsWith(val)));
+    });
+  }
+
+  function setItemProp(lessonIdx, prop, val, btn) {
+    const fc = document.getElementById('fc-' + lessonIdx);
+    if (!fc) return;
+    const item = fc.children[selectedItemIdx];
+    if (item) item.style[prop] = val;
+
+    // Update display
+    const cvEl = document.getElementById('cv-' + lessonIdx + '-' + prop);
+    if (cvEl) cvEl.textContent = val;
+
+    // Toggle active class
+    if (btn) {
+      btn.closest('.btn-group').querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+  }
+
+  // Initialise lesson 6: select item 0 on first load
+  document.addEventListener('DOMContentLoaded', () => {
+    const fc6 = document.getElementById('fc-6');
+    if (fc6 && fc6.children[0]) fc6.children[0].classList.add('selected-ring');
+  });
+</script>
+
+</body>
+</html>

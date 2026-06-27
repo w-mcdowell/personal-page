@@ -1,0 +1,520 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #0f1117;
+  --surface: #1a1d27;
+  --surface2: #22263a;
+  --border: #2e3350;
+  --accent: #6c8fff;
+  --accent2: #a78bfa;
+  --text: #e2e8f0;
+  --text-muted: #8892b0;
+  --green: #4ade80;
+  --pink: #f472b6;
+  --orange: #fb923c;
+  --yellow: #facc15;
+  --cyan: #22d3ee;
+  --red: #f87171;
+  --box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  --radius: 10px;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* ─── Layout ─── */
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+/* ─── Header ─── */
+.site-header {
+  text-align: center;
+  padding: 3rem 0 2rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 3rem;
+}
+
+.site-header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+}
+
+.site-header p {
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+  font-size: 1.05rem;
+}
+
+/* ─── Progress nav ─── */
+.progress-nav {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+}
+
+.progress-nav button {
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.progress-nav button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.progress-nav button.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ─── Section ─── */
+.lesson {
+  display: none;
+}
+
+.lesson.active {
+  display: block;
+}
+
+.lesson-header {
+  margin-bottom: 1.5rem;
+}
+
+.lesson-num {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--accent);
+  margin-bottom: 0.35rem;
+}
+
+.lesson-header h2 {
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.lesson-header p {
+  color: var(--text-muted);
+  max-width: 640px;
+  font-size: 0.97rem;
+}
+
+/* ─── Concept card ─── */
+.concept {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.2rem 1.4rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.93rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.concept strong {
+  color: var(--text);
+}
+
+.concept code {
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.88rem;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  color: var(--accent);
+}
+
+/* ─── Playground ─── */
+.playground {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+}
+
+/* Controls panel */
+.controls {
+  background: var(--surface);
+  padding: 1.2rem 1.4rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 1rem 2rem;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 160px;
+}
+
+.control-group label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+.control-group label code {
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.82rem;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  color: var(--accent);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.btn-group button {
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-group button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-group button.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Number input controls */
+.range-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 120px;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+}
+
+.range-val {
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.8rem;
+  color: var(--accent);
+  min-width: 28px;
+  text-align: right;
+}
+
+/* Preview area */
+.preview-wrap {
+  background: var(--bg);
+  padding: 1.5rem;
+  min-height: 220px;
+  position: relative;
+}
+
+.preview-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+  opacity: 0.6;
+}
+
+.flex-container {
+  border: 2px dashed var(--border);
+  border-radius: 8px;
+  min-height: 150px;
+  padding: 12px;
+  transition: all 0.3s ease;
+}
+
+.flex-item {
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  min-width: 50px;
+  min-height: 50px;
+  transition: all 0.3s ease;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+.flex-item:nth-child(1) { background: linear-gradient(135deg, #6c8fff, #a78bfa); }
+.flex-item:nth-child(2) { background: linear-gradient(135deg, #4ade80, #22d3ee); }
+.flex-item:nth-child(3) { background: linear-gradient(135deg, #f472b6, #fb923c); }
+.flex-item:nth-child(4) { background: linear-gradient(135deg, #facc15, #fb923c); }
+.flex-item:nth-child(5) { background: linear-gradient(135deg, #f87171, #f472b6); }
+
+/* CSS output */
+.css-output {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 1rem 1.4rem;
+}
+
+.css-output-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 0.6rem;
+}
+
+.css-output pre {
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.83rem;
+  line-height: 1.8;
+  color: var(--text);
+}
+
+.css-prop { color: var(--cyan); }
+.css-val  { color: var(--orange); }
+.css-brace { color: var(--text-muted); }
+.css-sel  { color: var(--accent2); }
+
+/* ─── Nav buttons ─── */
+.nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  gap: 1rem;
+}
+
+.nav-btn {
+  padding: 0.6rem 1.4rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.nav-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.nav-btn.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.nav-btn.primary:hover {
+  background: #5a7ef5;
+  border-color: #5a7ef5;
+  color: #fff;
+}
+
+.nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ─── Axis diagram ─── */
+.axis-diagram {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.axis-card {
+  flex: 1;
+  min-width: 200px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  text-align: center;
+}
+
+.axis-card h4 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.75rem;
+  color: var(--text-muted);
+}
+
+.axis-visual {
+  position: relative;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.axis-line {
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 2px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.axis-line.main { width: 80%; }
+.axis-line.cross {
+  width: 2px;
+  height: 70%;
+  background: linear-gradient(180deg, var(--pink), var(--orange));
+  position: absolute;
+}
+
+.axis-arrow {
+  font-size: 1.1rem;
+  position: absolute;
+}
+
+.axis-line.main .axis-arrow { right: -8px; }
+
+.axis-label-text {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+/* ─── Cheat sheet ─── */
+.cheat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.cheat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
+}
+
+.cheat-card h4 {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+}
+
+.cheat-card dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.25rem 0.75rem;
+  font-size: 0.83rem;
+}
+
+.cheat-card dt {
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  color: var(--cyan);
+}
+
+.cheat-card dd {
+  color: var(--text-muted);
+}
+
+/* ─── Item controls ─── */
+.item-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.item-selector {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.item-selector label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.item-selector .btn-group button.sel-1 { border-left: 3px solid #6c8fff; }
+.item-selector .btn-group button.sel-2 { border-left: 3px solid #4ade80; }
+.item-selector .btn-group button.sel-3 { border-left: 3px solid #f472b6; }
+
+.selected-ring {
+  outline: 3px solid var(--yellow) !important;
+  outline-offset: 2px;
+}
