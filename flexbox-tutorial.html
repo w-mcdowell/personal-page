@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Complete Flexbox &amp; CSS Selectors Tutorial</title>
+  <link rel="stylesheet" href="styles/tutorial.css" />
+</head>
+<body>
+
+<!-- =========================================================
+     SIDEBAR NAVIGATION
+     ========================================================= -->
+<input type="checkbox" id="nav-toggle" />
+<label for="nav-toggle" class="nav-hamburger" aria-label="Toggle navigation">&#9776;</label>
+
+<nav class="sidebar">
+  <h2>Contents</h2>
+
+  <details open>
+    <summary>Part I — CSS Foundations</summary>
+    <ul>
+      <li><a href="#ch1">Ch 1: How CSS Works</a></li>
+      <li><a href="#ch2">Ch 2: Selectors</a></li>
+      <li><a href="#ch3">Ch 3: The Box Model</a></li>
+    </ul>
+  </details>
+
+  <details open>
+    <summary>Part II — Flexbox Core</summary>
+    <ul>
+      <li><a href="#ch4">Ch 4: Introducing Flexbox</a></li>
+      <li><a href="#ch5">Ch 5: Container Properties</a></li>
+      <li><a href="#ch6">Ch 6: Item Properties</a></li>
+    </ul>
+  </details>
+
+  <details open>
+    <summary>Part III — Flexbox in Practice</summary>
+    <ul>
+      <li><a href="#ch7">Ch 7: Common Layouts</a></li>
+      <li><a href="#ch8">Ch 8: Responsive Flexbox</a></li>
+    </ul>
+  </details>
+</nav>
+
+<!-- =========================================================
+     MAIN CONTENT
+     ========================================================= -->
+<main class="content">
+
+<header class="hero">
+  <h1>The Complete Flexbox &amp; CSS Tutorial</h1>
+  <p class="subtitle">HTML5 &amp; CSS3 only — no JavaScript required</p>
+</header>
+
+<!-- ==========================================================
+     PART I — CSS FOUNDATIONS
+     ========================================================== -->
+<section class="part" id="part1">
+  <h2 class="part-title">Part I — CSS Foundations</h2>
+
+  <!-- ── Chapter 1 ── -->
+  <article class="chapter" id="ch1">
+    <h3>Chapter 1: How CSS Works</h3>
+
+    <!-- 1.1 -->
+    <section id="s1-1">
+      <h4>1.1 What Is CSS?</h4>
+      <p><strong>Cascading Style Sheets (CSS)</strong> is the language that controls how HTML elements look on screen. HTML provides structure; CSS provides presentation — colors, spacing, layout, typography, and animation.</p>
+      <p>CSS is applied to HTML in three ways:</p>
+      <ul>
+        <li><strong>Inline</strong> — a <code>style</code> attribute on a single element.</li>
+        <li><strong>Internal</strong> — a <code>&lt;style&gt;</code> block inside <code>&lt;head&gt;</code>.</li>
+        <li><strong>External</strong> — a separate <code>.css</code> file linked with <code>&lt;link&gt;</code> (preferred).</li>
+      </ul>
+    </section>
+
+    <!-- 1.2 -->
+    <section id="s1-2">
+      <h4>1.2 CSS Rule Anatomy</h4>
+      <p>Every CSS rule has a <em>selector</em> and a <em>declaration block</em>:</p>
+      <pre><code>selector {
+  property: value;
+  property: value;
+}</code></pre>
+      <p>The selector targets HTML elements; each declaration sets one visual property.</p>
+    </section>
+
+    <!-- 1.3 -->
+    <section id="s1-3">
+      <h4>1.3 The Cascade &amp; Specificity</h4>
+      <p>When multiple rules target the same element, CSS resolves conflicts using three factors (in order):</p>
+      <ol>
+        <li><strong>Origin &amp; importance</strong> — user-agent styles &lt; author styles &lt; <code>!important</code>.</li>
+        <li><strong>Specificity</strong> — inline styles &gt; IDs &gt; classes/attributes/pseudo-classes &gt; type selectors.</li>
+        <li><strong>Source order</strong> — later rules win over earlier ones at equal specificity.</li>
+      </ol>
+
+      <h5>Specificity Scoring</h5>
+      <table class="ref-table">
+        <thead>
+          <tr><th>Selector</th><th>Score (a, b, c)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>h1</code></td><td>0, 0, 1</td></tr>
+          <tr><td><code>.card</code></td><td>0, 1, 0</td></tr>
+          <tr><td><code>#hero</code></td><td>1, 0, 0</td></tr>
+          <tr><td><code>#hero .title h1</code></td><td>1, 1, 1</td></tr>
+          <tr><td><code>style="…"</code> (inline)</td><td>Wins over all non-!important</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 1.4 -->
+    <section id="s1-4">
+      <h4>1.4 Inheritance</h4>
+      <p>Some properties (mostly text-related) are <strong>inherited</strong> by child elements automatically: <code>color</code>, <code>font-family</code>, <code>font-size</code>, <code>line-height</code>, <code>text-align</code>, etc.</p>
+      <p>Layout properties like <code>margin</code>, <code>padding</code>, <code>border</code>, <code>display</code>, <code>width</code>, and <code>height</code> are <strong>not inherited</strong>.</p>
+      <p>You can force inheritance with the <code>inherit</code> keyword or reset with <code>initial</code> / <code>unset</code>.</p>
+    </section>
+
+    <!-- 1.5 -->
+    <section id="s1-5">
+      <h4>1.5 Units</h4>
+      <table class="ref-table">
+        <thead>
+          <tr><th>Unit</th><th>Type</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>px</code></td><td>Absolute</td><td>1 CSS pixel</td></tr>
+          <tr><td><code>em</code></td><td>Relative</td><td>Relative to parent font-size</td></tr>
+          <tr><td><code>rem</code></td><td>Relative</td><td>Relative to root (<code>&lt;html&gt;</code>) font-size</td></tr>
+          <tr><td><code>%</code></td><td>Relative</td><td>Percentage of parent dimension</td></tr>
+          <tr><td><code>vw / vh</code></td><td>Viewport</td><td>1% of viewport width / height</td></tr>
+          <tr><td><code>vmin / vmax</code></td><td>Viewport</td><td>1% of smaller / larger viewport dimension</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </article>
+
+  <!-- ── Chapter 2: Selectors ── -->
+  <article class="chapter" id="ch2">
+    <h3>Chapter 2: CSS Selectors — Comprehensive Guide</h3>
+
+    <!-- 2.1 -->
+    <section id="s2-1">
+      <h4>2.1 Simple Selectors</h4>
+
+      <h5>Type (Element) Selector</h5>
+      <p>Targets every instance of an HTML element.</p>
+      <pre><code>p  { color: #333; }
+h1 { font-size: 2rem; }</code></pre>
+
+      <h5>Class Selector</h5>
+      <p>Targets elements with a specific <code>class</code> attribute. Prefixed with a dot.</p>
+      <pre><code>.card    { border: 1px solid #ccc; }
+.active  { background: #0af; }</code></pre>
+
+      <h5>ID Selector</h5>
+      <p>Targets the single element with a matching <code>id</code>. Prefixed with <code>#</code>. Use sparingly — IDs have high specificity.</p>
+      <pre><code>#header { position: sticky; top: 0; }</code></pre>
+
+      <h5>Universal Selector</h5>
+      <p><code>*</code> matches every element. Often used in resets.</p>
+      <pre><code>*, *::before, *::after {
+  box-sizing: border-box;
+}</code></pre>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — Simple Selectors</p>
+        <div class="sel-demo-simple">
+          <p>I am a <code>&lt;p&gt;</code> (type selector)</p>
+          <p class="highlight">I have <code>.highlight</code> (class selector)</p>
+          <p id="unique-para">I have <code>#unique-para</code> (ID selector)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2.2 -->
+    <section id="s2-2">
+      <h4>2.2 Grouping Selector</h4>
+      <p>Comma-separate selectors to apply the same styles to multiple targets.</p>
+      <pre><code>h1, h2, h3 {
+  font-family: Georgia, serif;
+  color: #222;
+}</code></pre>
+    </section>
+
+    <!-- 2.3 -->
+    <section id="s2-3">
+      <h4>2.3 Combinator Selectors</h4>
+
+      <h5>Descendant (<code>A B</code>)</h5>
+      <p>Matches <code>B</code> anywhere inside <code>A</code>.</p>
+      <pre><code>nav a { text-decoration: none; }</code></pre>
+
+      <h5>Child (<code>A &gt; B</code>)</h5>
+      <p>Matches <code>B</code> only when it is a <em>direct</em> child of <code>A</code>.</p>
+      <pre><code>ul > li { list-style: square; }</code></pre>
+
+      <h5>Adjacent Sibling (<code>A + B</code>)</h5>
+      <p>Matches <code>B</code> when it immediately follows <code>A</code>.</p>
+      <pre><code>h2 + p { margin-top: 0; }</code></pre>
+
+      <h5>General Sibling (<code>A ~ B</code>)</h5>
+      <p>Matches all <code>B</code> elements that follow <code>A</code> (same parent).</p>
+      <pre><code>h2 ~ p { color: #555; }</code></pre>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — Combinators</p>
+        <div class="comb-demo">
+          <div class="comb-parent">
+            <span>Direct child (A &gt; B)</span>
+            <div class="comb-nested">
+              <span>Descendant (A B)</span>
+            </div>
+          </div>
+          <p class="comb-adjacent">Adjacent sibling (A + B)</p>
+          <p class="comb-general">General sibling (A ~ B)</p>
+          <p class="comb-general">General sibling (A ~ B)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2.4 -->
+    <section id="s2-4">
+      <h4>2.4 Attribute Selectors</h4>
+      <table class="ref-table">
+        <thead>
+          <tr><th>Selector</th><th>Matches</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>[attr]</code></td><td>Element has the attribute</td></tr>
+          <tr><td><code>[attr="val"]</code></td><td>Attribute equals <em>val</em></td></tr>
+          <tr><td><code>[attr~="val"]</code></td><td>Attribute word list contains <em>val</em></td></tr>
+          <tr><td><code>[attr|="val"]</code></td><td>Attribute equals <em>val</em> or starts with <em>val-</em></td></tr>
+          <tr><td><code>[attr^="val"]</code></td><td>Attribute starts with <em>val</em></td></tr>
+          <tr><td><code>[attr$="val"]</code></td><td>Attribute ends with <em>val</em></td></tr>
+          <tr><td><code>[attr*="val"]</code></td><td>Attribute contains <em>val</em></td></tr>
+        </tbody>
+      </table>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — Attribute Selectors</p>
+        <div class="attr-demo">
+          <a href="https://example.com">External link (href^="https")</a>
+          <a href="/about">Internal link</a>
+          <a href="mailto:hi@example.com">Email link (href^="mailto")</a>
+          <input type="text" placeholder="[type='text']" />
+          <input type="email" placeholder="[type='email']" />
+        </div>
+      </div>
+    </section>
+
+    <!-- 2.5 -->
+    <section id="s2-5">
+      <h4>2.5 Pseudo-Class Selectors</h4>
+
+      <h5>User-Action Pseudo-Classes</h5>
+      <table class="ref-table">
+        <thead><tr><th>Pseudo-class</th><th>Triggers when…</th></tr></thead>
+        <tbody>
+          <tr><td><code>:hover</code></td><td>Mouse is over the element</td></tr>
+          <tr><td><code>:focus</code></td><td>Element has keyboard focus</td></tr>
+          <tr><td><code>:focus-visible</code></td><td>Focus is visible (keyboard nav)</td></tr>
+          <tr><td><code>:focus-within</code></td><td>Any descendant has focus</td></tr>
+          <tr><td><code>:active</code></td><td>Element is being activated (clicked)</td></tr>
+          <tr><td><code>:visited</code></td><td>Link has been visited</td></tr>
+        </tbody>
+      </table>
+
+      <h5>Structural Pseudo-Classes</h5>
+      <table class="ref-table">
+        <thead><tr><th>Pseudo-class</th><th>Matches</th></tr></thead>
+        <tbody>
+          <tr><td><code>:first-child</code></td><td>First child of parent</td></tr>
+          <tr><td><code>:last-child</code></td><td>Last child of parent</td></tr>
+          <tr><td><code>:nth-child(n)</code></td><td>nth child (1-indexed); supports formulas like <code>2n</code>, <code>3n+1</code>, <code>odd</code>, <code>even</code></td></tr>
+          <tr><td><code>:nth-last-child(n)</code></td><td>nth child from the end</td></tr>
+          <tr><td><code>:only-child</code></td><td>Element with no siblings</td></tr>
+          <tr><td><code>:first-of-type</code></td><td>First of its element type in parent</td></tr>
+          <tr><td><code>:last-of-type</code></td><td>Last of its element type in parent</td></tr>
+          <tr><td><code>:nth-of-type(n)</code></td><td>nth of its type</td></tr>
+          <tr><td><code>:empty</code></td><td>Element has no children or text</td></tr>
+          <tr><td><code>:not(sel)</code></td><td>Elements that don't match <em>sel</em></td></tr>
+          <tr><td><code>:is(sel)</code></td><td>Matches any selector in list (forgiving)</td></tr>
+          <tr><td><code>:where(sel)</code></td><td>Like <code>:is()</code> but zero specificity</td></tr>
+          <tr><td><code>:has(sel)</code></td><td>Parent contains a child matching <em>sel</em></td></tr>
+        </tbody>
+      </table>
+
+      <h5>Form Pseudo-Classes</h5>
+      <table class="ref-table">
+        <thead><tr><th>Pseudo-class</th><th>Matches</th></tr></thead>
+        <tbody>
+          <tr><td><code>:checked</code></td><td>Checked checkbox / radio / option</td></tr>
+          <tr><td><code>:disabled</code></td><td>Disabled form element</td></tr>
+          <tr><td><code>:enabled</code></td><td>Enabled form element</td></tr>
+          <tr><td><code>:required</code></td><td>Input with <code>required</code> attribute</td></tr>
+          <tr><td><code>:optional</code></td><td>Input without <code>required</code></td></tr>
+          <tr><td><code>:valid</code></td><td>Input passing validation</td></tr>
+          <tr><td><code>:invalid</code></td><td>Input failing validation</td></tr>
+          <tr><td><code>:placeholder-shown</code></td><td>Input whose placeholder is visible</td></tr>
+        </tbody>
+      </table>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — Pseudo-Classes</p>
+        <ul class="pseudo-demo">
+          <li>First child (:first-child)</li>
+          <li>Second child</li>
+          <li>Third child (:nth-child(odd))</li>
+          <li>Fourth child</li>
+          <li>Fifth child (:nth-child(odd))</li>
+          <li>Last child (:last-child)</li>
+        </ul>
+        <p class="hover-me">Hover over me! I use <code>:hover</code></p>
+      </div>
+    </section>
+
+    <!-- 2.6 -->
+    <section id="s2-6">
+      <h4>2.6 Pseudo-Element Selectors</h4>
+      <table class="ref-table">
+        <thead><tr><th>Pseudo-element</th><th>Creates / targets</th></tr></thead>
+        <tbody>
+          <tr><td><code>::before</code></td><td>Inserts content before element's children</td></tr>
+          <tr><td><code>::after</code></td><td>Inserts content after element's children</td></tr>
+          <tr><td><code>::first-line</code></td><td>First rendered line of a block</td></tr>
+          <tr><td><code>::first-letter</code></td><td>First letter of a block</td></tr>
+          <tr><td><code>::placeholder</code></td><td>Placeholder text in inputs</td></tr>
+          <tr><td><code>::selection</code></td><td>User-highlighted text</td></tr>
+          <tr><td><code>::marker</code></td><td>List item bullet / number</td></tr>
+        </tbody>
+      </table>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — Pseudo-Elements</p>
+        <p class="pseudo-el-before">This paragraph has <code>::before</code> content.</p>
+        <p class="pseudo-el-after">This paragraph has <code>::after</code> content.</p>
+        <p class="pseudo-el-firstletter">This paragraph demonstrates the ::first-letter pseudo-element making the first character large and colored.</p>
+        <p class="pseudo-el-selection">Select this text to see a custom ::selection color.</p>
+      </div>
+    </section>
+
+    <!-- 2.7 -->
+    <section id="s2-7">
+      <h4>2.7 Selector Cheat Sheet</h4>
+      <pre><code>/* Simple */
+div              /* type */
+.card            /* class */
+#hero            /* ID */
+*                /* universal */
+
+/* Combinators */
+div p            /* descendant */
+div > p          /* child */
+h2 + p           /* adjacent sibling */
+h2 ~ p           /* general sibling */
+
+/* Attribute */
+[href]           /* has attribute */
+[type="email"]   /* exact value */
+[href^="https"]  /* starts with */
+[src$=".png"]    /* ends with */
+[class*="btn"]   /* contains */
+
+/* Pseudo-classes */
+:hover  :focus  :active  :visited
+:first-child  :last-child  :nth-child(2n)
+:not(.hidden)  :is(h1, h2, h3)  :has(> img)
+
+/* Pseudo-elements */
+::before  ::after  ::first-line
+::first-letter  ::placeholder  ::selection</code></pre>
+    </section>
+  </article>
+
+  <!-- ── Chapter 3: Box Model ── -->
+  <article class="chapter" id="ch3">
+    <h3>Chapter 3: The Box Model</h3>
+
+    <!-- 3.1 -->
+    <section id="s3-1">
+      <h4>3.1 Content, Padding, Border, Margin</h4>
+      <p>Every element is a rectangular box with four layers:</p>
+      <ol>
+        <li><strong>Content</strong> — the text / child elements.</li>
+        <li><strong>Padding</strong> — space between content and border.</li>
+        <li><strong>Border</strong> — the visible edge.</li>
+        <li><strong>Margin</strong> — space outside the border (between this box and neighbors).</li>
+      </ol>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — The Box Model</p>
+        <div class="boxmodel-demo">
+          <div class="bm-margin">
+            margin
+            <div class="bm-border">
+              border
+              <div class="bm-padding">
+                padding
+                <div class="bm-content">content</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3.2 -->
+    <section id="s3-2">
+      <h4>3.2 <code>box-sizing</code></h4>
+      <p>By default (<code>content-box</code>), <code>width</code> sets only the content width — padding and border are <em>added</em> on top.</p>
+      <p>With <code>border-box</code>, <code>width</code> includes padding and border. This is almost always what you want:</p>
+      <pre><code>*, *::before, *::after {
+  box-sizing: border-box;
+}</code></pre>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — content-box vs border-box</p>
+        <div class="boxsizing-demo">
+          <div class="bs-content-box">content-box<br/>width: 200px<br/>+ 20px padding<br/>= 240px total</div>
+          <div class="bs-border-box">border-box<br/>width: 200px<br/>padding included<br/>= 200px total</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3.3 -->
+    <section id="s3-3">
+      <h4>3.3 Display Basics</h4>
+      <p>Before flexbox, you need to understand the basic <code>display</code> values:</p>
+      <table class="ref-table">
+        <thead><tr><th>Value</th><th>Behavior</th></tr></thead>
+        <tbody>
+          <tr><td><code>block</code></td><td>Full-width, starts on new line (<code>div</code>, <code>p</code>, <code>h1</code>)</td></tr>
+          <tr><td><code>inline</code></td><td>Flows with text, no width/height control (<code>span</code>, <code>a</code>, <code>strong</code>)</td></tr>
+          <tr><td><code>inline-block</code></td><td>Inline flow but respects width/height</td></tr>
+          <tr><td><code>none</code></td><td>Removed from layout entirely</td></tr>
+          <tr><td><code>flex</code></td><td>Flex container (Part II)</td></tr>
+          <tr><td><code>inline-flex</code></td><td>Inline-level flex container</td></tr>
+        </tbody>
+      </table>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — Display Types</p>
+        <div class="display-demo">
+          <div class="dd-block">block</div>
+          <div class="dd-block">block</div>
+          <span class="dd-inline">inline</span>
+          <span class="dd-inline">inline</span>
+          <span class="dd-inline">inline</span>
+          <span class="dd-inline-block">inline-block</span>
+          <span class="dd-inline-block">inline-block</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3.4 -->
+    <section id="s3-4">
+      <h4>3.4 Margin Collapse</h4>
+      <p>Vertical margins of adjacent block elements <strong>collapse</strong> — the larger margin wins, they don't add together. This only happens with block layout; <strong>flexbox eliminates margin collapse</strong> between flex items, which is one reason it's easier to work with.</p>
+    </section>
+  </article>
+</section>
+
+<!-- ==========================================================
+     PART II — FLEXBOX CORE
+     ========================================================== -->
+<section class="part" id="part2">
+  <h2 class="part-title">Part II — Flexbox Core</h2>
+
+  <!-- ── Chapter 4 ── -->
+  <article class="chapter" id="ch4">
+    <h3>Chapter 4: Introducing Flexbox</h3>
+
+    <!-- 4.1 -->
+    <section id="s4-1">
+      <h4>4.1 What Is Flexbox?</h4>
+      <p>The <strong>Flexible Box Layout Module</strong> (flexbox) is a one-dimensional layout system. It distributes space among items in a container and controls their alignment, even when their sizes are unknown or dynamic.</p>
+      <p>"One-dimensional" means flexbox handles layout in <em>one direction at a time</em> — either a row or a column (unlike CSS Grid, which is two-dimensional).</p>
+    </section>
+
+    <!-- 4.2 -->
+    <section id="s4-2">
+      <h4>4.2 Flex Container vs Flex Items</h4>
+      <p>Set <code>display: flex</code> on a parent element to make it a <strong>flex container</strong>. Its direct children automatically become <strong>flex items</strong>.</p>
+      <pre><code>.container {
+  display: flex;   /* This element is now a flex container */
+}
+/* All direct children of .container are flex items */</code></pre>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — Flex Container &amp; Items</p>
+        <div class="flex-intro-demo">
+          <div class="fi">Item 1</div>
+          <div class="fi">Item 2</div>
+          <div class="fi">Item 3</div>
+        </div>
+        <p class="demo-note">The parent has <code>display: flex</code>. Children sit side by side.</p>
+      </div>
+    </section>
+
+    <!-- 4.3 -->
+    <section id="s4-3">
+      <h4>4.3 Axes: Main &amp; Cross</h4>
+      <p>Flexbox uses two axes:</p>
+      <ul>
+        <li><strong>Main axis</strong> — the direction items flow. Default: horizontal (left → right).</li>
+        <li><strong>Cross axis</strong> — perpendicular to main. Default: vertical (top → bottom).</li>
+      </ul>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — Main Axis &amp; Cross Axis</p>
+        <div class="axis-demo">
+          <div class="axis-container">
+            <div class="fi">1</div>
+            <div class="fi">2</div>
+            <div class="fi">3</div>
+          </div>
+          <div class="axis-labels">
+            <span class="axis-main">Main Axis →</span>
+            <span class="axis-cross">Cross Axis ↓</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4.4 -->
+    <section id="s4-4">
+      <h4>4.4 <code>display: flex</code> vs <code>display: inline-flex</code></h4>
+      <p><code>flex</code> creates a block-level flex container (takes full width). <code>inline-flex</code> creates an inline-level one (only as wide as its content).</p>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — flex vs inline-flex</p>
+        <div class="inline-flex-demo">
+          <div class="if-flex">
+            <div class="fi">A</div><div class="fi">B</div>
+          </div>
+          <p class="demo-note">↑ <code>display: flex</code> — full width</p>
+          <div class="if-inline">
+            <div class="fi">A</div><div class="fi">B</div>
+          </div>
+          <span> ← <code>display: inline-flex</code> — shrinks to content</span>
+        </div>
+      </div>
+    </section>
+  </article>
+
+  <!-- ── Chapter 5: Container Properties ── -->
+  <article class="chapter" id="ch5">
+    <h3>Chapter 5: Flex Container Properties</h3>
+
+    <!-- 5.1 -->
+    <section id="s5-1">
+      <h4>5.1 <code>flex-direction</code></h4>
+      <p>Sets the main axis direction.</p>
+      <table class="ref-table">
+        <thead><tr><th>Value</th><th>Main axis</th></tr></thead>
+        <tbody>
+          <tr><td><code>row</code> (default)</td><td>Left → Right</td></tr>
+          <tr><td><code>row-reverse</code></td><td>Right → Left</td></tr>
+          <tr><td><code>column</code></td><td>Top → Bottom</td></tr>
+          <tr><td><code>column-reverse</code></td><td>Bottom → Top</td></tr>
+        </tbody>
+      </table>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — flex-direction</p>
+        <div class="fd-grid">
+          <div>
+            <p class="demo-note">row (default)</p>
+            <div class="fd-demo fd-row"><div class="fi">1</div><div class="fi">2</div><div class="fi">3</div></div>
+          </div>
+          <div>
+            <p class="demo-note">row-reverse</p>
+            <div class="fd-demo fd-row-rev"><div class="fi">1</div><div class="fi">2</div><div class="fi">3</div></div>
+          </div>
+          <div>
+            <p class="demo-note">column</p>
+            <div class="fd-demo fd-col"><div class="fi">1</div><div class="fi">2</div><div class="fi">3</div></div>
+          </div>
+          <div>
+            <p class="demo-note">column-reverse</p>
+            <div class="fd-demo fd-col-rev"><div class="fi">1</div><div class="fi">2</div><div class="fi">3</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5.2 -->
+    <section id="s5-2">
+      <h4>5.2 <code>flex-wrap</code></h4>
+      <p>Controls whether items wrap onto multiple lines.</p>
+      <table class="ref-table">
+        <thead><tr><th>Value</th><th>Behavior</th></tr></thead>
+        <tbody>
+          <tr><td><code>nowrap</code> (default)</td><td>All items on one line; may overflow</td></tr>
+          <tr><td><code>wrap</code></td><td>Items wrap to next line</td></tr>
+          <tr><td><code>wrap-reverse</code></td><td>Items wrap upward</td></tr>
+        </tbody>
+      </table>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — flex-wrap</p>
+        <div class="fw-grid">
+          <div>
+            <p class="demo-note">nowrap (overflow)</p>
+            <div class="fw-demo fw-nowrap">
+              <div class="fi fw-item">1</div><div class="fi fw-item">2</div><div class="fi fw-item">3</div>
+              <div class="fi fw-item">4</div><div class="fi fw-item">5</div><div class="fi fw-item">6</div>
+            </div>
+          </div>
+          <div>
+            <p class="demo-note">wrap</p>
+            <div class="fw-demo fw-wrap">
+              <div class="fi fw-item">1</div><div class="fi fw-item">2</div><div class="fi fw-item">3</div>
+              <div class="fi fw-item">4</div><div class="fi fw-item">5</div><div class="fi fw-item">6</div>
+            </div>
+          </div>
+          <div>
+            <p class="demo-note">wrap-reverse</p>
+            <div class="fw-demo fw-wrap-rev">
+              <div class="fi fw-item">1</div><div class="fi fw-item">2</div><div class="fi fw-item">3</div>
+              <div class="fi fw-item">4</div><div class="fi fw-item">5</div><div class="fi fw-item">6</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5.3 -->
+    <section id="s5-3">
+      <h4>5.3 <code>flex-flow</code> (Shorthand)</h4>
+      <p>Combines <code>flex-direction</code> and <code>flex-wrap</code>.</p>
+      <pre><code>flex-flow: row wrap;        /* direction + wrap */
+flex-flow: column nowrap;   /* equivalent to defaults for column */</code></pre>
+    </section>
+
+    <!-- 5.4 -->
+    <section id="s5-4">
+      <h4>5.4 <code>justify-content</code></h4>
+      <p>Distributes items along the <strong>main axis</strong>.</p>
+      <table class="ref-table">
+        <thead><tr><th>Value</th><th>Effect</th></tr></thead>
+        <tbody>
+          <tr><td><code>flex-start</code> (default)</td><td>Pack items to start</td></tr>
+          <tr><td><code>flex-end</code></td><td>Pack items to end</td></tr>
+          <tr><td><code>center</code></td><td>Center items</td></tr>
+          <tr><td><code>space-between</code></td><td>Equal space between items; no edge space</td></tr>
+          <tr><td><code>space-around</code></td><td>Equal space around each item (edges get half)</td></tr>
+          <tr><td><code>space-evenly</code></td><td>Equal space everywhere including edges</td></tr>
+        </tbody>
+      </table>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — justify-content</p>
+        <div class="jc-grid">
+          <div>
+            <p class="demo-note">flex-start</p>
+            <div class="jc-demo jc-start"><div class="fi">1</div><div class="fi">2</div><div class="fi">3</div></div>
+          </div>
+          <div>
+            <p class="demo-note">flex-end</p>
+            <div class="jc-demo jc-end"><div class="fi">1</div><div class="fi">2</div><div class="fi">3</div></div>
+          </div>
+          <div>
+            <p class="demo-note">center</p>
+            <div class="jc-demo jc-center"><div class="fi">1</div><div class="fi">2</div><div class="fi">3</div></div>
+          </div>
+          <div>
+            <p class="demo-note">space-between</p>
+            <div class="jc-demo jc-between"><div class="fi">1</div><div class="fi">2</div><div class="fi">3</div></div>
+          </div>
+          <div>
+            <p class="demo-note">space-around</p>
+            <div class="jc-demo jc-around"><div class="fi">1</div><div class="fi">2</div><div class="fi">3</div></div>
+          </div>
+          <div>
+            <p class="demo-note">space-evenly</p>
+            <div class="jc-demo jc-evenly"><div class="fi">1</div><div class="fi">2</div><div class="fi">3</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5.5 -->
+    <section id="s5-5">
+      <h4>5.5 <code>align-items</code></h4>
+      <p>Aligns items along the <strong>cross axis</strong> (within a single line).</p>
+      <table class="ref-table">
+        <thead><tr><th>Value</th><th>Effect</th></tr></thead>
+        <tbody>
+          <tr><td><code>stretch</code> (default)</td><td>Items fill the cross axis</td></tr>
+          <tr><td><code>flex-start</code></td><td>Align to cross-start</td></tr>
+          <tr><td><code>flex-end</code></td><td>Align to cross-end</td></tr>
+          <tr><td><code>center</code></td><td>Center on cross axis</td></tr>
+          <tr><td><code>baseline</code></td><td>Align text baselines</td></tr>
+        </tbody>
+      </table>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — align-items</p>
+        <div class="ai-grid">
+          <div>
+            <p class="demo-note">stretch (default)</p>
+            <div class="ai-demo ai-stretch">
+              <div class="fi ai-tall">1</div><div class="fi">2</div><div class="fi">3</div>
+            </div>
+          </div>
+          <div>
+            <p class="demo-note">flex-start</p>
+            <div class="ai-demo ai-start">
+              <div class="fi ai-tall">1</div><div class="fi">2</div><div class="fi">3</div>
+            </div>
+          </div>
+          <div>
+            <p class="demo-note">center</p>
+            <div class="ai-demo ai-center">
+              <div class="fi ai-tall">1</div><div class="fi">2</div><div class="fi">3</div>
+            </div>
+          </div>
+          <div>
+            <p class="demo-note">flex-end</p>
+            <div class="ai-demo ai-end">
+              <div class="fi ai-tall">1</div><div class="fi">2</div><div class="fi">3</div>
+            </div>
+          </div>
+          <div>
+            <p class="demo-note">baseline</p>
+            <div class="ai-demo ai-baseline">
+              <div class="fi ai-tall" style="font-size:1.5rem;">1</div><div class="fi">2</div><div class="fi" style="font-size:.75rem;">3</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5.6 -->
+    <section id="s5-6">
+      <h4>5.6 <code>align-content</code></h4>
+      <p>Distributes <em>lines</em> along the cross axis when there are <strong>multiple rows</strong> (requires <code>flex-wrap: wrap</code>). Has no effect on single-line containers.</p>
+      <p>Accepts the same values as <code>justify-content</code> plus <code>stretch</code> (default).</p>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — align-content (wrap)</p>
+        <div class="ac-grid">
+          <div>
+            <p class="demo-note">flex-start</p>
+            <div class="ac-demo ac-start">
+              <div class="fi fw-item">1</div><div class="fi fw-item">2</div><div class="fi fw-item">3</div>
+              <div class="fi fw-item">4</div><div class="fi fw-item">5</div><div class="fi fw-item">6</div>
+            </div>
+          </div>
+          <div>
+            <p class="demo-note">center</p>
+            <div class="ac-demo ac-center">
+              <div class="fi fw-item">1</div><div class="fi fw-item">2</div><div class="fi fw-item">3</div>
+              <div class="fi fw-item">4</div><div class="fi fw-item">5</div><div class="fi fw-item">6</div>
+            </div>
+          </div>
+          <div>
+            <p class="demo-note">space-between</p>
+            <div class="ac-demo ac-between">
+              <div class="fi fw-item">1</div><div class="fi fw-item">2</div><div class="fi fw-item">3</div>
+              <div class="fi fw-item">4</div><div class="fi fw-item">5</div><div class="fi fw-item">6</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5.7 -->
+    <section id="s5-7">
+      <h4>5.7 <code>gap</code></h4>
+      <p>Adds space <em>between</em> flex items (not on outer edges). Cleaner than margins.</p>
+      <pre><code>.container {
+  display: flex;
+  gap: 16px;          /* row-gap and column-gap */
+  gap: 16px 24px;     /* row-gap  column-gap */
+}</code></pre>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — gap</p>
+        <div class="gap-grid">
+          <div>
+            <p class="demo-note">No gap</p>
+            <div class="gap-demo gap-none"><div class="fi">1</div><div class="fi">2</div><div class="fi">3</div></div>
+          </div>
+          <div>
+            <p class="demo-note">gap: 8px</p>
+            <div class="gap-demo gap-sm"><div class="fi">1</div><div class="fi">2</div><div class="fi">3</div></div>
+          </div>
+          <div>
+            <p class="demo-note">gap: 24px</p>
+            <div class="gap-demo gap-lg"><div class="fi">1</div><div class="fi">2</div><div class="fi">3</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+
+  <!-- ── Chapter 6: Item Properties ── -->
+  <article class="chapter" id="ch6">
+    <h3>Chapter 6: Flex Item Properties</h3>
+
+    <!-- 6.1 -->
+    <section id="s6-1">
+      <h4>6.1 <code>order</code></h4>
+      <p>Controls the visual order of items. Default is <code>0</code>. Lower values appear first.</p>
+      <pre><code>.item-c { order: -1; }  /* moves before items with order: 0 */
+.item-a { order: 2; }   /* moves after items with order: 0 or 1 */</code></pre>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — order</p>
+        <div class="order-demo">
+          <div class="fi order-2">1 (order: 2)</div>
+          <div class="fi order-3">2 (order: 3)</div>
+          <div class="fi order-1">3 (order: 1)</div>
+          <div class="fi order-neg">4 (order: -1)</div>
+        </div>
+        <p class="demo-note">Visual order: 4 → 3 → 1 → 2</p>
+      </div>
+    </section>
+
+    <!-- 6.2 -->
+    <section id="s6-2">
+      <h4>6.2 <code>flex-grow</code></h4>
+      <p>Defines how much an item should <strong>grow</strong> relative to siblings when extra space is available. Default is <code>0</code> (don't grow).</p>
+      <pre><code>.item { flex-grow: 1; }  /* all items share space equally */
+.wide { flex-grow: 2; }  /* gets twice as much extra space */</code></pre>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — flex-grow</p>
+        <div class="fg-grid">
+          <div>
+            <p class="demo-note">All flex-grow: 0 (default)</p>
+            <div class="fg-demo"><div class="fi">0</div><div class="fi">0</div><div class="fi">0</div></div>
+          </div>
+          <div>
+            <p class="demo-note">All flex-grow: 1</p>
+            <div class="fg-demo"><div class="fi fg1">1</div><div class="fi fg1">1</div><div class="fi fg1">1</div></div>
+          </div>
+          <div>
+            <p class="demo-note">flex-grow: 1, 2, 1</p>
+            <div class="fg-demo"><div class="fi fg1">1</div><div class="fi fg2">2</div><div class="fi fg1">1</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6.3 -->
+    <section id="s6-3">
+      <h4>6.3 <code>flex-shrink</code></h4>
+      <p>Defines how much an item <strong>shrinks</strong> when the container is too small. Default is <code>1</code>. Set to <code>0</code> to prevent shrinking.</p>
+      <pre><code>.no-shrink { flex-shrink: 0; }  /* this item won't shrink */
+.shrinks   { flex-shrink: 3; }  /* shrinks 3× faster than default */</code></pre>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — flex-shrink</p>
+        <div class="fs-demo">
+          <div class="fi fs-noshrink">shrink: 0 (won't shrink)</div>
+          <div class="fi fs-default">shrink: 1</div>
+          <div class="fi fs-more">shrink: 3</div>
+        </div>
+        <p class="demo-note">Resize your browser narrower to see the effect.</p>
+      </div>
+    </section>
+
+    <!-- 6.4 -->
+    <section id="s6-4">
+      <h4>6.4 <code>flex-basis</code></h4>
+      <p>Sets the <strong>initial size</strong> of an item before flex-grow / flex-shrink apply. Works like <code>width</code> (in row) or <code>height</code> (in column).</p>
+      <pre><code>.item { flex-basis: 200px; }  /* start at 200px, then grow/shrink */
+.item { flex-basis: 25%;   }  /* start at 25% of container */
+.item { flex-basis: auto;  }  /* use the item's width/content (default) */</code></pre>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — flex-basis</p>
+        <div class="fb-demo">
+          <div class="fi fb-100">basis: 100px</div>
+          <div class="fi fb-200">basis: 200px</div>
+          <div class="fi fb-auto">basis: auto</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6.5 -->
+    <section id="s6-5">
+      <h4>6.5 <code>flex</code> Shorthand</h4>
+      <p>Combines <code>flex-grow</code>, <code>flex-shrink</code>, and <code>flex-basis</code>. This is the recommended way to set flex item sizing.</p>
+      <table class="ref-table">
+        <thead><tr><th>Shorthand</th><th>Expands to</th><th>Use case</th></tr></thead>
+        <tbody>
+          <tr><td><code>flex: 0 1 auto</code></td><td>Don't grow, can shrink, auto basis</td><td>Default behavior</td></tr>
+          <tr><td><code>flex: 1</code></td><td><code>1 1 0</code></td><td>Fill available space equally</td></tr>
+          <tr><td><code>flex: auto</code></td><td><code>1 1 auto</code></td><td>Grow and shrink from content size</td></tr>
+          <tr><td><code>flex: none</code></td><td><code>0 0 auto</code></td><td>Rigid — no grow, no shrink</td></tr>
+          <tr><td><code>flex: 2 0 150px</code></td><td>Grow 2×, don't shrink, start at 150px</td><td>Custom sizing</td></tr>
+        </tbody>
+      </table>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — flex shorthand</p>
+        <div class="flex-sh-grid">
+          <div>
+            <p class="demo-note">flex: 1 (equal share)</p>
+            <div class="flex-sh-demo"><div class="fi fsh1">flex:1</div><div class="fi fsh1">flex:1</div><div class="fi fsh1">flex:1</div></div>
+          </div>
+          <div>
+            <p class="demo-note">flex: 1, flex: 2, flex: 1</p>
+            <div class="flex-sh-demo"><div class="fi fsh1">flex:1</div><div class="fi fsh2">flex:2</div><div class="fi fsh1">flex:1</div></div>
+          </div>
+          <div>
+            <p class="demo-note">flex: none vs flex: 1</p>
+            <div class="flex-sh-demo"><div class="fi fshn">flex:none</div><div class="fi fsh1">flex:1</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6.6 -->
+    <section id="s6-6">
+      <h4>6.6 <code>align-self</code></h4>
+      <p>Overrides <code>align-items</code> for a <em>single</em> item. Same values as <code>align-items</code>.</p>
+      <pre><code>.container { align-items: flex-start; }
+.special   { align-self: flex-end; }    /* just this one */</code></pre>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — align-self</p>
+        <div class="as-demo">
+          <div class="fi as-start">self: start</div>
+          <div class="fi as-center">self: center</div>
+          <div class="fi as-end">self: end</div>
+          <div class="fi as-stretch">self: stretch</div>
+        </div>
+      </div>
+    </section>
+  </article>
+</section>
+
+<!-- ==========================================================
+     PART III — FLEXBOX IN PRACTICE
+     ========================================================== -->
+<section class="part" id="part3">
+  <h2 class="part-title">Part III — Flexbox in Practice</h2>
+
+  <!-- ── Chapter 7 ── -->
+  <article class="chapter" id="ch7">
+    <h3>Chapter 7: Common Layouts</h3>
+
+    <!-- 7.1 -->
+    <section id="s7-1">
+      <h4>7.1 Navigation Bar</h4>
+      <pre><code>nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+}
+nav ul {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+}</code></pre>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — Navbar</p>
+        <nav class="layout-nav">
+          <span class="nav-logo">MyBrand</span>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <!-- 7.2 -->
+    <section id="s7-2">
+      <h4>7.2 Card Grid</h4>
+      <pre><code>.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.card {
+  flex: 1 1 280px; /* grow, shrink, min 280px */
+}</code></pre>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — Card Grid</p>
+        <div class="layout-cards">
+          <div class="layout-card">
+            <div class="card-img"></div>
+            <h5>Card One</h5>
+            <p>Flex items wrap responsively without media queries.</p>
+          </div>
+          <div class="layout-card">
+            <div class="card-img"></div>
+            <h5>Card Two</h5>
+            <p>Each card has <code>flex: 1 1 280px</code> as its base.</p>
+          </div>
+          <div class="layout-card">
+            <div class="card-img"></div>
+            <h5>Card Three</h5>
+            <p>Cards grow to fill space and wrap when needed.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7.3 -->
+    <section id="s7-3">
+      <h4>7.3 Perfect Centering</h4>
+      <p>The classic problem solved in two lines:</p>
+      <pre><code>.center-me {
+  display: flex;
+  justify-content: center;  /* main axis */
+  align-items: center;      /* cross axis */
+}</code></pre>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — Perfect Center</p>
+        <div class="layout-center">
+          <div class="centered-box">Centered</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7.4 -->
+    <section id="s7-4">
+      <h4>7.4 Holy Grail Layout</h4>
+      <p>Header, footer, and a three-column body (sidebar, main, aside):</p>
+      <pre><code>.holy-grail {
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+}
+.hg-body {
+  display: flex;
+  flex: 1;
+}
+.hg-main    { flex: 1; }
+.hg-sidebar { flex: 0 0 150px; }
+.hg-aside   { flex: 0 0 120px; }</code></pre>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — Holy Grail</p>
+        <div class="holy-grail">
+          <div class="hg-header">Header</div>
+          <div class="hg-body">
+            <div class="hg-sidebar">Sidebar</div>
+            <div class="hg-main">Main Content</div>
+            <div class="hg-aside">Aside</div>
+          </div>
+          <div class="hg-footer">Footer</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7.5 -->
+    <section id="s7-5">
+      <h4>7.5 Sticky Footer</h4>
+      <p>Push the footer to the bottom even when content is short:</p>
+      <pre><code>body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+main { flex: 1; }  /* main grows to fill remaining space */</code></pre>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — Sticky Footer</p>
+        <div class="sticky-footer-demo">
+          <div class="sf-header">Header</div>
+          <div class="sf-main">Short content — footer still at bottom.</div>
+          <div class="sf-footer">Footer (sticks to bottom)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7.6 -->
+    <section id="s7-6">
+      <h4>7.6 Input Group</h4>
+      <pre><code>.input-group {
+  display: flex;
+}
+.input-group input { flex: 1; }
+.input-group button { flex: none; }</code></pre>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — Input Group</p>
+        <div class="layout-input-group">
+          <input type="text" placeholder="Search..." />
+          <button type="button">Go</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7.7 -->
+    <section id="s7-7">
+      <h4>7.7 Media Object</h4>
+      <p>Image on one side, text on the other — a classic pattern:</p>
+      <pre><code>.media {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.media-body { flex: 1; }</code></pre>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — Media Object</p>
+        <div class="media-object">
+          <div class="media-img"></div>
+          <div class="media-body">
+            <h5>Media Object Title</h5>
+            <p>The image stays fixed-width while the text fills the remaining space. This pattern is used for comments, user profiles, article previews, and more.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+
+  <!-- ── Chapter 8: Responsive ── -->
+  <article class="chapter" id="ch8">
+    <h3>Chapter 8: Responsive Design with Flexbox</h3>
+
+    <!-- 8.1 -->
+    <section id="s8-1">
+      <h4>8.1 Media Queries Recap</h4>
+      <p>Media queries apply CSS rules conditionally based on viewport size:</p>
+      <pre><code>/* Mobile-first: base styles are for small screens */
+.container { flex-direction: column; }
+
+/* Tablet and up */
+@media (min-width: 768px) {
+  .container { flex-direction: row; }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .container { gap: 32px; }
+}</code></pre>
+    </section>
+
+    <!-- 8.2 -->
+    <section id="s8-2">
+      <h4>8.2 Responsive Patterns</h4>
+
+      <h5>Pattern 1: Column → Row</h5>
+      <p>Stack items vertically on mobile, switch to horizontal on wider screens.</p>
+      <pre><code>.stack-to-row {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+@media (min-width: 600px) {
+  .stack-to-row { flex-direction: row; }
+}</code></pre>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — Column → Row (resize browser)</p>
+        <div class="resp-stack">
+          <div class="fi resp-item">Item 1</div>
+          <div class="fi resp-item">Item 2</div>
+          <div class="fi resp-item">Item 3</div>
+        </div>
+      </div>
+
+      <h5>Pattern 2: Fluid Cards with <code>flex-wrap</code></h5>
+      <p>No media queries needed — <code>flex-wrap</code> + <code>flex-basis</code> handles it.</p>
+      <pre><code>.fluid-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.fluid-cards > * {
+  flex: 1 1 250px;
+}</code></pre>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — Fluid Cards (resize browser)</p>
+        <div class="resp-fluid">
+          <div class="fi resp-fluid-card">Card A</div>
+          <div class="fi resp-fluid-card">Card B</div>
+          <div class="fi resp-fluid-card">Card C</div>
+          <div class="fi resp-fluid-card">Card D</div>
+        </div>
+      </div>
+
+      <h5>Pattern 3: Sidebar Layout</h5>
+      <pre><code>.sidebar-layout {
+  display: flex;
+  flex-wrap: wrap;
+}
+.sidebar-layout > aside {
+  flex: 1 1 200px;    /* sidebar min 200px */
+}
+.sidebar-layout > main {
+  flex: 3 1 400px;    /* main is 3× wider */
+}</code></pre>
+
+      <div class="demo-box">
+        <p class="demo-label">Live Demo — Sidebar Layout (resize browser)</p>
+        <div class="resp-sidebar">
+          <div class="fi resp-aside">Sidebar (min 200px)</div>
+          <div class="fi resp-main">Main Content Area (flex: 3)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8.3 -->
+    <section id="s8-3">
+      <h4>8.3 Best Practices Summary</h4>
+      <ol>
+        <li><strong>Use <code>flex</code> shorthand</strong> — <code>flex: 1</code> is clearer than setting grow/shrink/basis separately.</li>
+        <li><strong>Use <code>gap</code> over margins</strong> — no need to remove margins on first/last items.</li>
+        <li><strong>Let items wrap</strong> — <code>flex-wrap: wrap</code> with a <code>flex-basis</code> often removes the need for media queries.</li>
+        <li><strong>Don't overuse <code>order</code></strong> — it changes visual order but not tab/screen-reader order (accessibility concern).</li>
+        <li><strong>Use <code>min-width: 0</code> on flex items</strong> when text overflow / truncation is needed — flex items default to <code>min-width: auto</code>.</li>
+        <li><strong>Combine with Grid</strong> — use flexbox for one-dimensional flow, CSS Grid for two-dimensional layouts.</li>
+      </ol>
+    </section>
+
+    <!-- 8.4 -->
+    <section id="s8-4">
+      <h4>8.4 Complete Property Reference</h4>
+
+      <h5>Container Properties</h5>
+      <table class="ref-table">
+        <thead><tr><th>Property</th><th>Values</th><th>Default</th></tr></thead>
+        <tbody>
+          <tr><td><code>display</code></td><td><code>flex</code> | <code>inline-flex</code></td><td>—</td></tr>
+          <tr><td><code>flex-direction</code></td><td><code>row</code> | <code>row-reverse</code> | <code>column</code> | <code>column-reverse</code></td><td><code>row</code></td></tr>
+          <tr><td><code>flex-wrap</code></td><td><code>nowrap</code> | <code>wrap</code> | <code>wrap-reverse</code></td><td><code>nowrap</code></td></tr>
+          <tr><td><code>flex-flow</code></td><td><code>&lt;direction&gt; &lt;wrap&gt;</code></td><td><code>row nowrap</code></td></tr>
+          <tr><td><code>justify-content</code></td><td><code>flex-start</code> | <code>flex-end</code> | <code>center</code> | <code>space-between</code> | <code>space-around</code> | <code>space-evenly</code></td><td><code>flex-start</code></td></tr>
+          <tr><td><code>align-items</code></td><td><code>stretch</code> | <code>flex-start</code> | <code>flex-end</code> | <code>center</code> | <code>baseline</code></td><td><code>stretch</code></td></tr>
+          <tr><td><code>align-content</code></td><td><code>stretch</code> | <code>flex-start</code> | <code>flex-end</code> | <code>center</code> | <code>space-between</code> | <code>space-around</code> | <code>space-evenly</code></td><td><code>stretch</code></td></tr>
+          <tr><td><code>gap</code></td><td><code>&lt;length&gt;</code></td><td><code>0</code></td></tr>
+        </tbody>
+      </table>
+
+      <h5>Item Properties</h5>
+      <table class="ref-table">
+        <thead><tr><th>Property</th><th>Values</th><th>Default</th></tr></thead>
+        <tbody>
+          <tr><td><code>order</code></td><td><code>&lt;integer&gt;</code></td><td><code>0</code></td></tr>
+          <tr><td><code>flex-grow</code></td><td><code>&lt;number&gt;</code></td><td><code>0</code></td></tr>
+          <tr><td><code>flex-shrink</code></td><td><code>&lt;number&gt;</code></td><td><code>1</code></td></tr>
+          <tr><td><code>flex-basis</code></td><td><code>auto</code> | <code>&lt;length&gt;</code> | <code>&lt;percentage&gt;</code></td><td><code>auto</code></td></tr>
+          <tr><td><code>flex</code></td><td><code>&lt;grow&gt; &lt;shrink&gt; &lt;basis&gt;</code></td><td><code>0 1 auto</code></td></tr>
+          <tr><td><code>align-self</code></td><td><code>auto</code> | <code>flex-start</code> | <code>flex-end</code> | <code>center</code> | <code>baseline</code> | <code>stretch</code></td><td><code>auto</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+  </article>
+</section>
+
+<footer class="tutorial-footer">
+  <p>The Complete Flexbox &amp; CSS Tutorial &mdash; HTML5 &amp; CSS3 Only</p>
+  <p><a href="index.html">&larr; Back to Home</a></p>
+</footer>
+
+</main>
+</body>
+</html>
